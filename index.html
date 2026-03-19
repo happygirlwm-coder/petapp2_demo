@@ -8,15 +8,15 @@
 <style>
 body {
   margin: 0;
-  font-family: sans-serif;
   overflow: hidden;
+  font-family: sans-serif;
 }
 
 .container {
   display: flex;
   width: 400vw;
   height: 100vh;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 }
 
 .page {
@@ -27,10 +27,10 @@ body {
   box-sizing: border-box;
 }
 
-.page1 { background: #f5e6d6; }
-.page2 { background: #ffe0cc; }
-.page3 { background: #e6f2ff; }
-.page4 { background: #fff0e6; }
+.p1 { background: #f5e6d6; }
+.p2 { background: #ffe0cc; }
+.p3 { background: #e6f2ff; }
+.p4 { background: #fff0e6; }
 
 .card {
   background: white;
@@ -38,7 +38,7 @@ body {
   border-radius: 20px;
 }
 
-.button {
+.btn {
   background: orange;
   color: white;
   padding: 12px;
@@ -53,40 +53,36 @@ body {
 
 <div class="container" id="slider">
 
-  <!-- 1 今日反思 -->
-  <div class="page page1">
+  <div class="page p1">
     <h1>今日反思</h1>
     <div class="card">
       今天你為寵物做了什麼讓牠快樂？<br><br>
       🐾 散步 🐾 陪玩 🐾 擁抱
       <br><br>
       <input style="width:100%;padding:10px;" placeholder="寫下你的想法...">
-      <div class="button">儲存情緒</div>
+      <div class="btn">儲存情緒</div>
     </div>
   </div>
 
-  <!-- 2 拍照任務 -->
-  <div class="page page2">
+  <div class="page p2">
     <h1>拍照任務</h1>
     <div class="card">
       捕捉牠最放鬆的瞬間 📸<br><br>
       任務進度：3/5
-      <div class="button">拍照 +50</div>
+      <div class="btn">拍照 +50</div>
     </div>
   </div>
 
-  <!-- 3 地圖 -->
-  <div class="page page3">
+  <div class="page p3">
     <h1>附近寵物</h1>
     <div class="card">
       🐶 Mocha - 200m<br>
       🐱 Mimi - 150m
-      <div class="button">打招呼</div>
+      <div class="btn">打招呼</div>
     </div>
   </div>
 
-  <!-- 4 店家 -->
-  <div class="page page4">
+  <div class="page p4">
     <h1>附近店家</h1>
     <div class="card">
       ☕ 寵物咖啡 250m ⭐4.8<br>
@@ -119,4 +115,3 @@ document.addEventListener("touchend", e => {
 
 </body>
 </html>
-     

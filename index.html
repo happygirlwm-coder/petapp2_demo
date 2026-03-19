@@ -96,11 +96,13 @@ body {
   </div>
 
 </div>
-
 <script>
 let current = 0;
 let startX = 0;
+let moveX = 0;
 let isDragging = false;
+
+const slider = document.getElementById("slider");
 
 // 開始拖
 document.addEventListener("mousedown", e => {
@@ -110,12 +112,24 @@ document.addEventListener("mousedown", e => {
 
 document.addEventListener("mousemove", e => {
   if (!isDragging) return;
+  moveX = e.clientX;
+  let diff = startX - moveX;
+
+  slider.style.transition = "none";
+  slider.style.transform = `translateX(${-current * window.innerWidth - diff}px)`;
 });
 
 document.addEventListener("mouseup", e => {
   if (!isDragging) return;
-  handleSwipe(e.clientX);
   isDragging = false;
+
+  let diff = startX - e.clientX;
+
+  if (diff > 50 && current < 3) current++;
+  if (diff < -50 && current > 0) current--;
+
+  slider.style.transition = "transform 0.3s ease";
+  slider.style.transform = `translateX(-${current * 100}vw)`;
 });
 
 // 手機
@@ -123,22 +137,23 @@ document.addEventListener("touchstart", e => {
   startX = e.touches[0].clientX;
 });
 
-document.addEventListener("touchend", e => {
-  handleSwipe(e.changedTouches[0].clientX);
+document.addEventListener("touchmove", e => {
+  let diff = startX - e.touches[0].clientX;
+
+  slider.style.transition = "none";
+  slider.style.transform = `translateX(${-current * window.innerWidth - diff}px)`;
 });
 
-// 滑動邏輯
-function handleSwipe(endX) {
-  let diff = startX - endX;
+document.addEventListener("touchend", e => {
+  let diff = startX - e.changedTouches[0].clientX;
 
-  if (diff > 30 && current < 3) current++;
-  if (diff < -30 && current > 0) current--;
+  if (diff > 50 && current < 3) current++;
+  if (diff < -50 && current > 0) current--;
 
-  document.getElementById("slider").style.transform =
-    `translateX(-${current * 100}vw)`;
-}
+  slider.style.transition = "transform 0.3s ease";
+  slider.style.transform = `translateX(-${current * 100}vw)`;
+});
 </script>
-
 
 
 </body>

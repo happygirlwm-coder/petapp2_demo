@@ -92,17 +92,30 @@ body {
   </div>
 
 </div>
-
 <script>
 let current = 0;
 let startX = 0;
 
+// 手機
 document.addEventListener("touchstart", e => {
   startX = e.touches[0].clientX;
 });
 
 document.addEventListener("touchend", e => {
-  let endX = e.changedTouches[0].clientX;
+  handleSwipe(e.changedTouches[0].clientX);
+});
+
+// 電腦
+document.addEventListener("mousedown", e => {
+  startX = e.clientX;
+});
+
+document.addEventListener("mouseup", e => {
+  handleSwipe(e.clientX);
+});
+
+// 共用滑動邏輯
+function handleSwipe(endX) {
   let diff = startX - endX;
 
   if (diff > 50 && current < 3) current++;
@@ -110,7 +123,7 @@ document.addEventListener("touchend", e => {
 
   document.getElementById("slider").style.transform =
     `translateX(-${current * 100}vw)`;
-});
+}
 </script>
 
 </body>

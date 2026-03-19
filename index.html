@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet App UI</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  width: 400vw;
+  height: 100vh;
+  transition: transform 0.3s ease;
+}
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/* 不同頁面顏色 */
+.page1 { background: #FFE6D5; }
+.page2 { background: #FFD8C2; }
+.page3 { background: #E3F2FD; }
+.page4 { background: #FFF3E0; }
+
+h1 {
+  font-size: 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.button {
+  background: orange;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="slider">
+
+  <!-- 1️⃣ 今日反思 -->
+  <div class="page page1">
+    <h1>今日反思</h1>
+    <div class="card">
+      今天你為寵物做了什麼讓牠快樂？
+      <br><br>
+      🐾 散步 🐾 陪玩 🐾 擁抱
+      <br><br>
+      <input placeholder="寫下你的想法..." style="width:100%; padding:10px;">
+      <div class="button">儲存情緒</div>
+    </div>
+  </div>
+
+  <!-- 2️⃣ 拍照任務 -->
+  <div class="page page2">
+    <h1>拍照任務</h1>
+    <div class="card">
+      捕捉牠最放鬆的瞬間 📸
+      <br><br>
+      任務進度：3/5
+      <div class="button">拍照上傳 +50</div>
+    </div>
+  </div>
+
+  <!-- 3️⃣ 附近寵物 -->
+  <div class="page page3">
+    <h1>附近寵物</h1>
+    <div class="card">
+      🐶 Mocha - 200m  
+      <br><br>
+      🐱 Mimi - 150m
+      <div class="button">打招呼</div>
+    </div>
+  </div>
+
+  <!-- 4️⃣ 附近店家 -->
+  <div class="page page4">
+    <h1>附近店家</h1>
+    <div class="card">
+      ☕ 寵物咖啡 250m ⭐4.8  
+      🏥 獸醫院 300m ⭐4.9  
+      🛍️ 寵物店 180m ⭐4.5  
+    </div>
+  </div>
+
+</div>
+
+<script>
+let current = 0;
+let startX = 0;
+
+const slider = document.getElementById("slider");
+
+document.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+  let diff = startX - endX;
+
+  if (diff > 50 && current < 3) current++;
+  if (diff < -50 && current > 0) current--;
+
+  slider.style.transform = `translateX(-${current * 100}vw)`;
+});
+</script>
+
+</body>
+</html>

@@ -100,8 +100,25 @@ body {
 <script>
 let current = 0;
 let startX = 0;
+let isDragging = false;
 
-// 手機滑動
+// 開始拖
+document.addEventListener("mousedown", e => {
+  startX = e.clientX;
+  isDragging = true;
+});
+
+document.addEventListener("mousemove", e => {
+  if (!isDragging) return;
+});
+
+document.addEventListener("mouseup", e => {
+  if (!isDragging) return;
+  handleSwipe(e.clientX);
+  isDragging = false;
+});
+
+// 手機
 document.addEventListener("touchstart", e => {
   startX = e.touches[0].clientX;
 });
@@ -110,26 +127,19 @@ document.addEventListener("touchend", e => {
   handleSwipe(e.changedTouches[0].clientX);
 });
 
-// 電腦滑鼠
-document.addEventListener("mousedown", e => {
-  startX = e.clientX;
-});
-
-document.addEventListener("mouseup", e => {
-  handleSwipe(e.clientX);
-});
-
-// 共用邏輯
+// 滑動邏輯
 function handleSwipe(endX) {
   let diff = startX - endX;
 
-  if (diff > 50 && current < 3) current++;
-  if (diff < -50 && current > 0) current--;
+  if (diff > 30 && current < 3) current++;
+  if (diff < -30 && current > 0) current--;
 
   document.getElementById("slider").style.transform =
     `translateX(-${current * 100}vw)`;
 }
 </script>
+
+
 
 </body>
 </html>
